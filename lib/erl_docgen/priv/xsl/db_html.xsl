@@ -580,10 +580,10 @@
       <head>
         <xsl:choose>
           <xsl:when test="string-length($stylesheet) > 0">
-            <link rel="stylesheet" href="{$topdocdir}/{$stylesheet}" type="text/css"/>
+            <link rel="stylesheet" href="{$topdocdir}/css/{$stylesheet}" type="text/css"/>
           </xsl:when>
           <xsl:otherwise>
-            <link rel="stylesheet" href="{$topdocdir}/otp_doc.css" type="text/css"/>
+            <link rel="stylesheet" href="{$topdocdir}/css/otp_doc.css" type="text/css"/>
           </xsl:otherwise>
         </xsl:choose>
         <xsl:choose>
@@ -735,10 +735,10 @@
   <xsl:template name="menu_top">
     <xsl:choose>
       <xsl:when test="string-length($logo) > 0">
-        <img alt="Erlang logo" src="{$topdocdir}/{$logo}"/>
+        <img alt="Erlang logo" src="{$topdocdir}/images/{$logo}"/>
       </xsl:when>
       <xsl:otherwise>
-        <img alt="Erlang logo" src="{$topdocdir}/erlang-logo.png"/>
+        <img alt="Erlang logo" src="{$topdocdir}/images/erlang-logo.png"/>
       </xsl:otherwise>
     </xsl:choose>
     <br/>
@@ -2133,7 +2133,7 @@
     <xsl:document href="{$outdir}/{$type}_glossary.html" method="html"  encoding="UTF-8" indent="yes" doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN">
     <html>
       <head>
-        <link rel="stylesheet" href="{$topdocdir}/otp_doc.css" type="text/css"/>
+        <link rel="stylesheet" href="{$topdocdir}/css/otp_doc.css" type="text/css"/>
         <title>Erlang Documentation -- <xsl:value-of select="header/title"/></title>
       </head>
       <body bgcolor="white" text="#000000" link="#0000ff" vlink="#ff00ff" alink="#ff0000">
@@ -2188,7 +2188,7 @@
     <xsl:document href="{$outdir}/{$type}_bibliography.html" method="html"  encoding="UTF-8" indent="yes" doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN">
     <html>
       <head>
-        <link rel="stylesheet" href="{$topdocdir}/otp_doc.css" type="text/css"/>
+        <link rel="stylesheet" href="{$topdocdir}/css/otp_doc.css" type="text/css"/>
         <title>Erlang Documentation -- <xsl:value-of select="header/title"/></title>
       </head>
       <body bgcolor="white" text="#000000" link="#0000ff" vlink="#ff00ff" alink="#ff0000">

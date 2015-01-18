@@ -110,15 +110,12 @@ XML_FILES = \
 
 # ----------------------------------------------------
 
-HTML_FILES = $(XML_APPLICATION_FILES:%.xml=$(HTMLDIR)/%.html) \
-	$(XML_PART_FILES:%.xml=$(HTMLDIR)/%.html)
-
 INFO_FILE = ../../info
 
 MAN3_FILES = $(XML_REF3_FILES:%.xml=$(MAN3DIR)/%.3)
 MAN6_FILES = $(XML_REF6_FILES:%_app.xml=$(MAN6DIR)/%.6)
 
-HTML_REF_MAN_FILE = $(HTMLDIR)/index.html
+TOP_HTML_FILE = $(HTMLDIR)/index.html
 
 TOP_PDF_FILE = $(PDFDIR)/$(APPLICATION)-$(VSN).pdf
 
@@ -142,7 +139,7 @@ $(TOP_PDF_FILE): $(XML_FILES)
 
 pdf: $(TOP_PDF_FILE)
 
-html: $(HTML_REF_MAN_FILE)
+html: $(TOP_HTML_FILE)
 
 man: $(MAN3_FILES) $(MAN6_FILES)
 
@@ -169,8 +166,10 @@ release_docs_spec: docs
 	$(INSTALL_DIR) "$(RELSYSDIR)/doc/pdf"
 	$(INSTALL_DATA) $(TOP_PDF_FILE) "$(RELSYSDIR)/doc/pdf"
 	$(INSTALL_DIR) "$(RELSYSDIR)/doc/html"
-	$(INSTALL_DATA) $(HTMLDIR)/* \
-		"$(RELSYSDIR)/doc/html"
+	$(INSTALL_DATA) $(HTMLDIR)/guides/index.html "$(RELSYSDIR)/doc/html"
+	$(INSTALL_DIR) "$(RELSYSDIR)/doc/html/guides"
+	$(INSTALL_DATA) $(HTMLDIR)/guides/*.html "$(RELSYSDIR)/doc/html/guides"
+	$(INSTALL_DIR) "$(RELSYSDIR)/doc/html/reference"
 	$(INSTALL_DATA) $(INFO_FILE) "$(RELSYSDIR)"
 	$(INSTALL_DIR) "$(RELEASE_PATH)/man/man3"
 	$(INSTALL_DATA) $(MAN3DIR)/* "$(RELEASE_PATH)/man/man3"

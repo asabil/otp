@@ -50,28 +50,9 @@ $(HTMLDIR)/index.html: $(XML_FILES) $(SPECS_FILES)
 	  --stringparam pdfname "$(PDFNAME)" \
           -path $(DOCGEN)/priv/dtd \
           -path $(DOCGEN)/priv/dtd_html_entities \
-            $(DOCGEN)/priv/xsl/db_html.xsl book.xml
+            $(DOCGEN)/priv/xsl/db_html5.xsl book.xml
 
 endif
-
-$(HTMLDIR)/users_guide.html: $(XML_FILES)
-	date=`date +"%B %e, %Y"`; \
-	$(XSLTPROC) --noout  \
-		--stringparam outdir  $(HTMLDIR)  \
-		--stringparam docgen "$(DOCGEN)"  \
-		--stringparam topdocdir "$(TOPDOCDIR)" \
-		--stringparam pdfdir "$(PDFDIR)" \
-		--stringparam gendate "$$date" \
-	        --stringparam appname "$(APPLICATION)" \
-	        --stringparam appver "$(VSN)" \
-		--stringparam stylesheet "$(CSS_FILE)" \
-		--stringparam winprefix "$(WINPREFIX)" \
-		--stringparam logo "$(HTMLLOGO_FILE)" \
-		--stringparam pdfname "$(PDFNAME)" \
-	        --xinclude  \
-		-path $(DOCGEN)/priv/dtd \
-	        -path $(DOCGEN)/priv/dtd_html_entities \
-	        $(DOCGEN)/priv/xsl/db_html.xsl book.xml
 
 %.fo: $(XML_FILES) $(SPECS_FILES)
 	date=`date +"%B %e, %Y"`; \
@@ -92,21 +73,7 @@ $(HTMLDIR)/users_guide.html: $(XML_FILES)
 # ------------------------------------------------------------------------
 ifneq ($(XML_FILES),)
 
-# ----------------------------------------------------
-# Generation of application index data
-# ----------------------------------------------------
-$(HTMLDIR)/$(APPLICATION).eix: $(XML_FILES) $(SPECS_FILES)
-	date=`date +"%B %e, %Y"`; \
-	$(XSLTPROC) --stringparam docgen "$(DOCGEN)" \
-		--stringparam gendate "$$date" \
-	        --stringparam appname "$(APPLICATION)" \
-	        --stringparam appver "$(VSN)" \
-	        -xinclude $(TOP_SPECS_PARAM)  \
-		-path $(DOCGEN)/priv/dtd \
-	        -path $(DOCGEN)/priv/dtd_html_entities \
-	        $(DOCGEN)/priv/xsl/db_eix.xsl book.xml >  $@ 
-
-docs: $(HTMLDIR)/$(APPLICATION).eix
+docs:
 
 xmllint: $(XML_FILES)
 	$(XMLLINT) --noout --valid --nodefdtd --loaddtd --path $(DOCGEN)/priv/dtd:$(DOCGEN)/priv/dtd_html_entities  $(XML_FILES)
@@ -121,14 +88,23 @@ local_html: TOPDOCDIR=.
 local_html: local_copy_of_topdefs html
 
 local_copy_of_topdefs:
-	$(INSTALL) $(DOCGEN)/priv/css/otp_doc.css $(HTMLDIR)
-	$(INSTALL) $(DOCGEN)/priv/images/erlang-logo.png $(HTMLDIR)
-	$(INSTALL) $(DOCGEN)/priv/images/erlang-logo.gif $(HTMLDIR)
+	$(INSTALL_DIR) $(HTMLDIR)/css
+	$(INSTALL) $(DOCGEN)/priv/css/otp_doc.css \
+		$(DOCGEN)/priv/css/normalize.css \
+		$(DOCGEN)/priv/css/doc.css \
+		$(DOCGEN)/priv/css/highlight.css $(HTMLDIR)/css
+	$(INSTALL_DIR) $(HTMLDIR)/images
+	$(INSTALL) $(DOCGEN)/priv/images/erlang-logo.png \
+		$(DOCGEN)/priv/images/erlang-logo.gif \
+		$(DOCGEN)/priv/images/erlang-logo.svg $(HTMLDIR)/images
 	$(INSTALL_DIR) $(HTMLDIR)/js/flipmenu
 	$(INSTALL) $(DOCGEN)/priv/js/flipmenu/flip_closed.gif \
 	 	$(DOCGEN)/priv/js/flipmenu/flip_open.gif \
 		$(DOCGEN)/priv/js/flipmenu/flip_static.gif \
 		$(DOCGEN)/priv/js/flipmenu/flipmenu.js $(HTMLDIR)/js/flipmenu
+	$(INSTALL_DIR) $(HTMLDIR)/js/highlight
+	$(INSTALL) $(DOCGEN)/priv/js/highlight/highlight.pack.js \
+		$(DOCGEN)/priv/js/highlight/LICENSE $(HTMLDIR)/js/highlight
 
 endif
 

@@ -23,7 +23,7 @@ include $(ERL_TOP)/make/$(TARGET)/otp.mk
 # ----------------------------------------------------
 # Application version
 # ----------------------------------------------------
-include ../../vsn.mk
+include ../../../vsn.mk
 VSN=$(ERL_DOCGEN_VSN)
 
 # ----------------------------------------------------
@@ -37,12 +37,8 @@ RELSYSDIR = $(RELEASE_PATH)/lib/erl_docgen-$(VSN)
 # ----------------------------------------------------
 
 
-CSS_FILES = \
-	normalize.css \
-	doc.css \
-	highlight.css \
-	otp_doc.css
-
+JS_FILES = \
+	highlight.pack.js
 
 # ----------------------------------------------------
 # FLAGS
@@ -67,13 +63,13 @@ include $(ERL_TOP)/make/otp_release_targets.mk
 
 
 release_spec: opt
-	$(INSTALL_DIR) "$(RELSYSDIR)/priv/css"
-	$(INSTALL_DATA) $(CSS_FILES) "$(RELSYSDIR)/priv/css"
+	$(INSTALL_DIR) "$(RELSYSDIR)/priv/js/highlight"
+	$(INSTALL_DATA) $(JS_FILES) $(GIF_FILES) "$(RELSYSDIR)/priv/js/highlight"
 
 
 release_docs_spec:
-	$(INSTALL_DIR) "$(RELEASE_PATH)/doc"
-	$(INSTALL_DATA) $(CSS_FILES) ../nyi.html "$(RELEASE_PATH)/doc"
+	$(INSTALL_DIR) "$(RELEASE_PATH)/doc/js/highlight"
+	$(INSTALL_DATA) $(JS_FILES) $(GIF_FILES) "$(RELEASE_PATH)/doc/js/highlight"
 
 release_tests_spec:
 

@@ -52,7 +52,7 @@ the default value cannot be confused with the values of set entries.</p>
   calling <seealso marker="#resize-2">resize/2</seealso>.</p>
  
   <p>Examples:
-  </p><pre>  %% Create a fixed-size array with entries 0-9 set to 'undefined'
+  </p><code>  %% Create a fixed-size array with entries 0-9 set to 'undefined'
   A0 = array:new(10).
   10 = array:size(A0).
  
@@ -81,7 +81,7 @@ the default value cannot be confused with the values of set entries.</p>
   %% A fixed-size array does not grow automatically and does not
   %% allow accesses beyond the last set entry
   {'EXIT',{badarg,_}} = (catch array:set(18, true, A3)).
-  {'EXIT',{badarg,_}} = (catch array:get(18, A3)).</pre></description>
+  {'EXIT',{badarg,_}} = (catch array:get(18, A3)).</code></description>
 <datatypes>
   <datatype>
     <name name="array" n_vars="1"/>

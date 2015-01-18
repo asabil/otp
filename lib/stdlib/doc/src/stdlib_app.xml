@@ -88,7 +88,7 @@
     <title>See Also</title>
     <p><seealso marker="kernel:app">app(4)</seealso>,
       <seealso marker="kernel:application">application(3)</seealso>, 
-      <seealso marker="shell">shell(3)</seealso>, </p>
+      <seealso marker="shell">shell(3)</seealso></p>
   </section>
 </appref>
 

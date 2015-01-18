@@ -20,7 +20,7 @@
 
      -->
 
-<xsl:stylesheet version="2.0"
+<xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <!-- Text -->
@@ -28,16 +28,15 @@
         <strong><xsl:apply-templates/></strong>
     </xsl:template>
 
-    <xsl:template match="br">
-        <br/>
-    </xsl:template>
+    <xsl:template match="br"><br/></xsl:template>
+    <xsl:template match="nbsp">&#160;</xsl:template>
 
     <xsl:template match="c">
-        <code><xsl:apply-templates/></code>
+        <code class="erlang"><xsl:apply-templates/></code>
     </xsl:template>
 
     <xsl:template match="em">
-        <em><xsl:apply-templates/></em>
+        <strong><em><xsl:apply-templates/></em></strong>
     </xsl:template>
 
     <!-- Paragraph -->
@@ -47,7 +46,7 @@
 
     <!-- Code -->
     <xsl:template match="code">
-        <pre><code><xsl:apply-templates/></code></pre>
+        <pre><code class="erlang"><xsl:apply-templates/></code></pre>
     </xsl:template>
 
     <!-- Pre -->
@@ -102,6 +101,10 @@
 
     <!-- Image -->
     <xsl:template match="image">
+        <img src="{@file}"/>
+    </xsl:template>
+
+    <xsl:template match="image[icaption]">
         <figure>
             <img src="{@file}"/>
             <xsl:apply-templates select="icaption"/>
